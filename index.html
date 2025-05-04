@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assembleia Condomínio Villagio Azalea</title> <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Assembleia Condomínio</h1> <p> Condomínio Villagio Azalea</p>
+    </header>
+
+    <main>
+        <section id="loading-section">
+            <p>Carregando dados...</p> </section>
+        <section id="error-section" class="hidden">
+            <p><strong>Erro:</strong> <span id="error-message">Ocorreu um erro.</span></p>
+            <button onclick="location.reload()">Tentar Novamente</button>
+        </section>
+
+        <section id="agenda-section" class="hidden">
+            <h2>Pautas</h2> <div id="agenda-list">
+                </div>
+            <div class="action-box">
+                <h3>Criar Nova Pauta de Votação</h3> <input type="text" id="new-agenda-title" placeholder="Título da Pauta" required> <textarea id="new-agenda-description" placeholder="Descrição Detalhada da Pauta" rows="2"></textarea> <button id="create-agenda-button">Criar Pauta</button> <p id="agenda-feedback" class="feedback hidden"></p>
+            </div>
+        </section>
+
+        <section id="session-section" class="hidden">
+            <h2>Votações Abertas / Encerradas</h2> <div class="action-box">
+                <h3>Abrir Nova Votação</h3> <label for="select-agenda-for-session">Selecione a Pauta:</label> <select id="select-agenda-for-session">
+                    <option value="">-- Carregando Itens --</option> </select>
+                <label for="session-duration">Duração da Sessão (em minutos):</label>
+                <input type="number" id="session-duration" min="1" value="1" placeholder="Padrão: 1">
+                <button id="open-session-button">Abrir Votação</button> <p id="session-open-feedback" class="feedback hidden"></p>
+            </div>
+            <div id="session-list">
+                </div>
+        </section>
+
+        <div id="vote-modal" class="modal hidden">
+            <div class="modal-content">
+                <span class="close-button" onclick="closeVoteModal()">&times;</span>
+                <h2>Registrar Voto (Sessão <span id="modal-session-id-display"></span>)</h2> <p><strong>Item:</strong> <span id="modal-agenda-title"></span></p> <input type="hidden" id="modal-session-id">
+                 <div class="form-group">
+                    <label for="voter-cpf">CPF do Condômino:</label> <input type="text" id="voter-cpf" placeholder="CPF (registrado)" required> </div>
+                 <div class="form-group">
+                    <label for="voter-name">Nome do Condômino:</label> <input type="text" id="voter-name" placeholder="Nome (registrado)" required> </div>
+                <div class="vote-options">
+                    <button class="vote-button yes" onclick="submitVote('YES')">APROVAR (Sim)</button> <button class="vote-button no" onclick="submitVote('NO')">REJEITAR (Não)</button> </div>
+                <p id="vote-modal-feedback" class="feedback hidden"></p>
+            </div>
+        </div>
+
+         <div id="result-modal" class="modal hidden">
+            <div class="modal-content">
+                <span class="close-button" onclick="closeResultModal()">&times;</span>
+                <h2>Resultado da Votação (Sessão <span id="result-modal-session-id"></span>)</h2> <p><strong>Item:</strong> <span id="result-modal-agenda-title"></span></p> <div id="result-details">
+                    <p>Carregando resultados...</p>
+                </div>
+                 <p id="result-modal-feedback" class="feedback hidden"></p>
+            </div>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2025 - Sistema de Votação Condomínio</p> </footer>
+
+    <script src="js/script.js"></script>
+
+</body>
+</html>

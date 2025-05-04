@@ -1,0 +1,453 @@
+$primary-color: #0056b3;
+$secondary-color: #17a2b8;
+$success-color: #28a745;
+$error-color: #dc3545;
+$warning-color: #ffc107;
+$info-color: #17a2b8;
+$background-color: #f4f7f6;
+$container-bg: #ffffff;
+$text-color: #343a40;
+$muted-text-color: #6c757d;
+$border-color: #dee2e6;
+$border-radius: 0.3rem;
+$box-shadow: 0 0.15rem 0.4rem rgba(0, 0, 0, 0.08);
+$spacing-unit: 1rem;
+
+@mixin button-style($bg-color, $text-color: $container-bg) {
+  display: inline-block;
+  font-weight: 500;
+  color: $text-color;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  user-select: none;
+  background-color: $bg-color;
+  border: 1px solid $bg-color;
+  padding: 0.5rem 1rem;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  border-radius: $border-radius;
+  transition: all 0.15s ease-in-out;
+
+  &:hover:not(:disabled) {
+    background-color: darken($bg-color, 8%);
+    border-color: darken($bg-color, 10%);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+
+  &:disabled {
+    background-color: lighten($bg-color, 15%);
+    border-color: lighten($bg-color, 15%);
+    cursor: not-allowed;
+    opacity: 0.65;
+  }
+}
+
+body {
+  font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background-color: $background-color;
+  color: $text-color;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+header {
+  background-color: $primary-color;
+  color: $container-bg;
+  padding: $spacing-unit $spacing-unit * 2;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  h1 {
+    margin: 0 0 0.25rem 0;
+    font-size: 1.8rem;
+  }
+  p {
+    margin: 0;
+    font-size: 0.9rem;
+    opacity: 0.9;
+  }
+}
+
+main {
+  flex: 1;
+  max-width: 1000px;
+  width: 90%;
+  margin: $spacing-unit * 1.5 auto;
+  padding: $spacing-unit * 1.5;
+  background-color: $container-bg;
+  border-radius: $border-radius * 2;
+  box-shadow: $box-shadow;
+}
+
+section {
+  margin-bottom: $spacing-unit * 2.5;
+  padding: $spacing-unit * 1.5;
+  border: 1px solid $border-color;
+  border-radius: $border-radius;
+  background-color: lighten($background-color, 2%);
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+h1, h2, h3 {
+  color: $primary-color;
+  margin-top: 0;
+  margin-bottom: $spacing-unit * 1.2;
+}
+
+h2 {
+  border-bottom: 2px solid $primary-color;
+  padding-bottom: $spacing-unit * 0.5;
+  font-size: 1.6rem;
+}
+
+h3 {
+  font-size: 1.2rem;
+  color: darken($primary-color, 5%);
+  margin-bottom: $spacing-unit;
+}
+
+input[type="text"],
+input[type="number"],
+textarea,
+select {
+  display: block;
+  width: 100%;
+  max-width: 400px;
+  padding: 0.6rem 0.8rem;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: $text-color;
+  background-color: $container-bg;
+  background-clip: padding-box;
+  border: 1px solid $border-color;
+  border-radius: $border-radius;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  margin-bottom: $spacing-unit * 0.8;
+  box-sizing: border-box;
+
+  &:focus {
+    border-color: lighten($primary-color, 25%);
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba($primary-color, 0.25);
+  }
+}
+
+textarea {
+  resize: vertical;
+}
+
+label {
+  display: block;
+  margin-bottom: $spacing-unit * 0.3;
+  font-weight: 500;
+}
+
+.form-group {
+  margin-bottom: $spacing-unit;
+}
+
+button {
+  @include button-style($primary-color);
+  margin-right: $spacing-unit * 0.5;
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+#create-agenda-button, #open-session-button {
+  @include button-style($secondary-color);
+  margin-top: $spacing-unit * 0.5;
+}
+
+.action-button {
+  @include button-style($info-color);
+  padding: 0.3rem 0.6rem;
+  font-size: 0.85rem;
+  margin-left: $spacing-unit * 0.5;
+}
+
+.result-button {
+  @include button-style($warning-color, darken($warning-color, 50%));
+  padding: 0.3rem 0.6rem;
+  font-size: 0.85rem;
+  margin-left: $spacing-unit * 0.5;
+}
+
+#loading-section p {
+  font-style: italic;
+  color: $muted-text-color;
+  text-align: center;
+  padding: $spacing-unit * 2 0;
+  font-size: 1.1rem;
+}
+
+#error-section {
+  text-align: center;
+  padding: $spacing-unit * 1.5;
+  background-color: lighten($error-color, 48%);
+  border: 1px solid lighten($error-color, 35%);
+  border-radius: $border-radius;
+  color: $error-color;
+
+  button {
+    @include button-style($error-color);
+    margin-top: $spacing-unit;
+  }
+}
+
+.action-box {
+  background-color: lighten($primary-color, 65%);
+  border: 1px solid lighten($primary-color, 55%);
+  padding: $spacing-unit * 1.2;
+  margin-bottom: $spacing-unit * 1.5;
+  border-radius: $border-radius;
+}
+
+#agenda-list, #session-list {
+  margin-top: $spacing-unit * 1.5;
+  .list-item {
+    background-color: $container-bg;
+    padding: $spacing-unit;
+    margin-bottom: $spacing-unit;
+    border-radius: $border-radius;
+    border: 1px solid $border-color;
+    box-shadow: $box-shadow;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+
+    .item-info {
+      flex-grow: 1;
+      margin-right: $spacing-unit;
+      p { margin: 0.2rem 0; }
+      strong { color: $primary-color; }
+      .description, .status, .time { font-size: 0.9em; color: $muted-text-color; }
+      .status-OPEN { color: $success-color; font-weight: bold; }
+      .status-CLOSED { color: $error-color; font-weight: bold; }
+    }
+
+    .item-actions {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+    }
+  }
+
+  .no-items {
+    color: $muted-text-color;
+    font-style: italic;
+    text-align: center;
+    padding: $spacing-unit;
+  }
+}
+
+.feedback {
+  margin-top: $spacing-unit;
+  padding: $spacing-unit * 0.75;
+  border-radius: $border-radius;
+  font-weight: 500;
+  font-size: 0.9em;
+  text-align: center;
+}
+
+.feedback.success {
+  background-color: lighten($success-color, 50%);
+  border: 1px solid lighten($success-color, 35%);
+  color: darken($success-color, 10%);
+}
+
+.feedback.error {
+  background-color: lighten($error-color, 48%);
+  border: 1px solid lighten($error-color, 35%);
+  color: $error-color;
+}
+
+.feedback.info {
+  background-color: lighten($info-color, 50%);
+  border: 1px solid lighten($info-color, 35%);
+  color: darken($info-color, 10%);
+}
+
+.modal {
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &.hidden {
+    display: none;
+  }
+
+  .modal-content {
+    background-color: $container-bg;
+    padding: $spacing-unit * 2 $spacing-unit * 2.5;
+    border-radius: $border-radius * 2;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+    animation: fadeInScale 0.3s ease-out;
+
+    h2 {
+      margin-top: 0;
+      margin-bottom: $spacing-unit * 1.5;
+      font-size: 1.4rem;
+    }
+
+    .close-button {
+      color: $muted-text-color;
+      position: absolute;
+      top: $spacing-unit * 0.8;
+      right: $spacing-unit * 1.2;
+      font-size: 1.8rem;
+      font-weight: bold;
+      cursor: pointer;
+      line-height: 1;
+
+      &:hover {
+        color: $error-color;
+      }
+    }
+  }
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+#vote-modal {
+  .vote-options {
+    display: flex;
+    justify-content: space-around;
+    margin-top: $spacing-unit * 1.5;
+    margin-bottom: $spacing-unit;
+  }
+
+  .vote-button {
+    @include button-style($primary-color);
+    padding: 0.8rem 1.5rem;
+    font-size: 1.1rem;
+    flex-grow: 1;
+    margin: 0 $spacing-unit * 0.5;
+
+    &.yes {
+      @include button-style($success-color);
+    }
+
+    &.no {
+      @include button-style($error-color);
+    }
+  }
+}
+
+#result-modal {
+  #result-details {
+    margin-top: $spacing-unit;
+    font-size: 1.1rem;
+    p { margin: $spacing-unit * 0.5 0; }
+    strong { color: $primary-color; }
+    .result-highlight {
+      font-weight: bold;
+      font-size: 1.2em;
+      padding: 0.3em 0.5em;
+      border-radius: $border-radius;
+      display: inline-block;
+      margin-top: 0.5em;
+
+      &.APPROVED { background-color: lighten($success-color, 45%); color: $success-color; }
+      &.REJECTED { background-color: lighten($error-color, 48%); color: $error-color; }
+      &.TIE { background-color: lighten($warning-color, 45%); color: darken($warning-color, 20%); }
+      &.SESSION_IN_PROGRESS { background-color: lighten($info-color, 45%); color: $info-color; }
+    }
+  }
+}
+
+footer {
+  background-color: darken($background-color, 5%);
+  color: $muted-text-color;
+  text-align: center;
+  padding: $spacing-unit * 1.2 1rem;
+  margin-top: $spacing-unit * 2;
+  font-size: 0.9em;
+  border-top: 1px solid $border-color;
+}
+
+.hidden {
+  display: none !important;
+}
+
+@media (max-width: 768px) {
+  main {
+    width: 95%;
+    padding: $spacing-unit;
+  }
+
+  h1 { font-size: 1.6rem; }
+  h2 { font-size: 1.4rem; }
+
+  .list-item {
+    flex-direction: column;
+    align-items: flex-start;
+
+    .item-info {
+      margin-right: 0;
+      margin-bottom: $spacing-unit * 0.8;
+    }
+
+    .item-actions {
+      width: 100%;
+      justify-content: flex-end;
+    }
+  }
+
+  .modal-content {
+    padding: $spacing-unit * 1.5;
+    width: 95%;
+  }
+
+  #vote-modal .vote-button {
+    padding: 0.6rem 1rem;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  button, .action-button, .result-button {
+    width: 100%;
+    margin-bottom: $spacing-unit * 0.5;
+    margin-left: 0 !important;
+  }
+
+  .item-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  #vote-modal .vote-options {
+    flex-direction: column;
+    button { margin: $spacing-unit * 0.3 0; }
+  }
+}
